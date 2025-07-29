@@ -23,18 +23,18 @@ public class ShippingService {
         }
     }
 
-    public ShippingResponse calculateShipping(ShippingRequest shippingData){
-        ShippingStrategy strategy = strategyMap.get(shippingData.shippingType().toLowerCase());
+    public ShippingResponse calculateShipping(ShippingRequest shippingRequest){
+        ShippingStrategy strategy = strategyMap.get(shippingRequest.shippingType().toLowerCase());
         if (strategy == null) {
-            throw new IllegalArgumentException("Tipo de frete inválido: " + shippingData.shippingType());
+            throw new IllegalArgumentException("Tipo de frete inválido: " + shippingRequest.shippingType());
         }
 
-        BigDecimal shippingCost = strategy.calculate(shippingData.baseValue(), shippingData.destination());
+        BigDecimal shippingCost = strategy.calculate(shippingRequest.baseValue(), shippingRequest.destination());
 
         return new ShippingResponse(
-                shippingData.baseValue(),
-                shippingData.destination(),
-                shippingData.shippingType(),
+                shippingRequest.baseValue(),
+                shippingRequest.destination(),
+                shippingRequest.shippingType(),
                 shippingCost
         );
 

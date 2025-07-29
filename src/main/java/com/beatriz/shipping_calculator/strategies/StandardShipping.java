@@ -25,5 +25,4 @@ public class StandardShipping implements ShippingStrategy{
         return "standard";
     }
 
-
 }
