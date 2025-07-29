@@ -2,6 +2,7 @@ package com.beatriz.shipping_calculator.controllers;
 
 import com.beatriz.shipping_calculator.dtos.ShippingRequest;
 import com.beatriz.shipping_calculator.dtos.ShippingResponse;
+import com.beatriz.shipping_calculator.dtos.ShippingTypeDetailsResponse;
 import com.beatriz.shipping_calculator.services.ShippingFacade;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,5 +25,10 @@ public class ShippingController {
     @GetMapping("/shipping-types")
     public Set<String> listShippingTypes(){
         return shippingFacade.listShippingTypes();
+    }
+
+    @GetMapping("/shipping-types/{type}")
+    public ShippingTypeDetailsResponse getShippingTypeDetails(@PathVariable String type){
+        return shippingFacade.getShippingTypeDetails(type);
     }
 }

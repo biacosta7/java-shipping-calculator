@@ -29,7 +29,7 @@ public class ExpressShipping implements ShippingStrategy{
 
     @Override
     public String getDescription() {
-        return "Frete expresso com entrega rápida";
+        return "Express shipping with fast delivery";
     }
 
     @Override

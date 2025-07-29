@@ -3,10 +3,7 @@ package com.beatriz.shipping_calculator.services;
 import com.beatriz.shipping_calculator.dtos.ShippingRequest;
 import com.beatriz.shipping_calculator.dtos.ShippingResponse;
 import com.beatriz.shipping_calculator.dtos.ShippingTypeDetailsResponse;
-import com.beatriz.shipping_calculator.strategies.ExpressShipping;
 import com.beatriz.shipping_calculator.strategies.ShippingStrategy;
-import com.beatriz.shipping_calculator.strategies.StandardShipping;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -28,7 +25,7 @@ public class ShippingService {
     public ShippingResponse calculateShipping(ShippingRequest shippingRequest){
         ShippingStrategy strategy = strategyMap.get(shippingRequest.shippingType().toLowerCase());
         if (strategy == null) {
-            throw new IllegalArgumentException("Tipo de frete inválido: " + shippingRequest.shippingType());
+            throw new IllegalArgumentException("Invalid shipping type: " + shippingRequest.shippingType());
         }
 
         BigDecimal shippingCost = strategy.calculate(shippingRequest.baseValue(), shippingRequest.destination());
@@ -49,7 +46,7 @@ public class ShippingService {
     public ShippingTypeDetailsResponse getShippingTypeDetails(String type){
         ShippingStrategy strategy = strategyMap.get(type.toLowerCase());
         if (strategy == null) {
-            throw new IllegalArgumentException("Tipo de frete inválido: " + type);
+            throw new IllegalArgumentException("Invalid shipping type: " + type);
         }
 
         return new ShippingTypeDetailsResponse(

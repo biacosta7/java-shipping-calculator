@@ -27,7 +27,7 @@ public class StandardShipping implements ShippingStrategy{
 
     @Override
     public String getDescription() {
-        return "Frete padrão com prazo estendido";
+        return "Standard shipping with extended delivery time";
     }
 
     @Override
