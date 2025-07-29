@@ -1,10 +1,11 @@
 package com.beatriz.shipping_calculator.strategies;
 
-import java.math.BigDecimal;
-import java.util.Objects;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import static java.math.BigDecimal.valueOf;
 
+@Service("standard")
 public class StandardShipping implements ShippingStrategy{
 
     @Override
@@ -17,6 +18,11 @@ public class StandardShipping implements ShippingStrategy{
         }
 
         return value;
+    }
+
+    @Override
+    public String getType() {
+        return "standard";
     }
 
 
