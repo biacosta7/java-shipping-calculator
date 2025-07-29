@@ -25,4 +25,14 @@ public class StandardShipping implements ShippingStrategy{
         return "standard";
     }
 
+    @Override
+    public String getDescription() {
+        return "Frete padrão com prazo estendido";
+    }
+
+    @Override
+    public BigDecimal getBaseFee() {
+        return new BigDecimal("5.00");
+    }
+
 }

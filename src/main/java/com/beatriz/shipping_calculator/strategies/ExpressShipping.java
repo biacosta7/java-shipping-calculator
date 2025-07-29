@@ -26,4 +26,14 @@ public class ExpressShipping implements ShippingStrategy{
     public String getType() {
         return "express";
     }
+
+    @Override
+    public String getDescription() {
+        return "Frete expresso com entrega rápida";
+    }
+
+    @Override
+    public BigDecimal getBaseFee() {
+        return new BigDecimal("10.00");
+    }
 }

@@ -2,6 +2,7 @@ package com.beatriz.shipping_calculator.services;
 
 import com.beatriz.shipping_calculator.dtos.ShippingRequest;
 import com.beatriz.shipping_calculator.dtos.ShippingResponse;
+import com.beatriz.shipping_calculator.dtos.ShippingTypeDetailsResponse;
 import com.beatriz.shipping_calculator.strategies.ExpressShipping;
 import com.beatriz.shipping_calculator.strategies.ShippingStrategy;
 import com.beatriz.shipping_calculator.strategies.StandardShipping;
@@ -43,5 +44,18 @@ public class ShippingService {
 
     public Set<String> listShippingTypes(){
         return strategyMap.keySet();
+    }
+
+    public ShippingTypeDetailsResponse getShippingTypeDetails(String type){
+        ShippingStrategy strategy = strategyMap.get(type.toLowerCase());
+        if (strategy == null) {
+            throw new IllegalArgumentException("Tipo de frete inválido: " + type);
+        }
+
+        return new ShippingTypeDetailsResponse(
+                strategy.getType(),
+                strategy.getDescription(),
+                strategy.getBaseFee()
+        );
     }
 }
