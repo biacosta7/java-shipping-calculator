@@ -9,14 +9,14 @@ import static java.math.BigDecimal.valueOf;
 public class ExpressShipping implements ShippingStrategy{
     @Override
     public BigDecimal calculate(BigDecimal baseValue, String destination){
-        BigDecimal value = valueOf(20).add(
-                (valueOf(0.03).multiply(baseValue))
+        BigDecimal value = valueOf(25).add(
+                (valueOf(0.05).multiply(baseValue))
         );
         if ("international".equalsIgnoreCase(destination)){
             value = value.add(valueOf(30));
         }
-        if(baseValue.compareTo(valueOf(50)) < 0){
-            value = valueOf(50);
+        if(baseValue.compareTo(valueOf(100)) < 0){
+            value = valueOf(60);
         }
 
         return value;

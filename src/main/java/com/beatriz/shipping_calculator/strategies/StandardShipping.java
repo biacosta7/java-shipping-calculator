@@ -10,11 +10,11 @@ public class StandardShipping implements ShippingStrategy{
 
     @Override
     public BigDecimal calculate(BigDecimal baseValue, String destination){
-        BigDecimal value = (BigDecimal.TEN).add(
-                                (valueOf(0.01).multiply(baseValue))
-                            );
+        BigDecimal value = valueOf(15).add(
+                (valueOf(0.02).multiply(baseValue))
+        );
         if ("international".equalsIgnoreCase(destination)){
-            value = value.add(valueOf(15));
+            value = value.add(valueOf(20));
         }
 
         return value;
