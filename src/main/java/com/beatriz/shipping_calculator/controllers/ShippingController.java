@@ -3,13 +3,12 @@ package com.beatriz.shipping_calculator.controllers;
 import com.beatriz.shipping_calculator.dtos.ShippingRequest;
 import com.beatriz.shipping_calculator.dtos.ShippingResponse;
 import com.beatriz.shipping_calculator.services.ShippingFacade;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
-@RequestMapping("/calculate-shipping")
+@RequestMapping
 public class ShippingController {
     private final ShippingFacade shippingFacade;
 
@@ -17,8 +16,13 @@ public class ShippingController {
         this.shippingFacade = shippingFacade;
     }
 
-    @PostMapping
+    @PostMapping("/calculate-shipping")
     public ShippingResponse post(@RequestBody ShippingRequest shippingRequest){
         return shippingFacade.calculateShipping(shippingRequest);
+    }
+
+    @GetMapping("/shipping-types")
+    public Set<String> listShippingTypes(){
+        return shippingFacade.listShippingTypes();
     }
 }
