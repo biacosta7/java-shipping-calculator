@@ -1,9 +1,8 @@
 package com.beatriz.shipping_calculator.controllers;
 
-import com.beatriz.shipping_calculator.dtos.ShippingRequest;
-import com.beatriz.shipping_calculator.dtos.ShippingResponse;
-import com.beatriz.shipping_calculator.dtos.ShippingTypeDetailsResponse;
+import com.beatriz.shipping_calculator.dtos.*;
 import com.beatriz.shipping_calculator.services.ShippingFacade;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -31,4 +30,18 @@ public class ShippingController {
     public ShippingTypeDetailsResponse getShippingTypeDetails(@PathVariable String type){
         return shippingFacade.getShippingTypeDetails(type);
     }
+
+    @PutMapping("/update/{type}")
+    public ResponseEntity<UpdatedShippingResponse> updateShippingType(
+            @PathVariable String type,
+            @RequestBody UpdateShippingTypeRequest request
+    ) {
+        shippingFacade.updateShippingType(type, request.baseFee(), request.percentageFee());
+        return ResponseEntity.ok(new UpdatedShippingResponse(
+                type,
+                request.baseFee(),
+                request.percentageFee()
+        ));
+    }
+
 }

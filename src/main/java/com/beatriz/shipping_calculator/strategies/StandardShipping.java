@@ -7,18 +7,20 @@ import static java.math.BigDecimal.valueOf;
 
 @Service("standard")
 public class StandardShipping implements ShippingStrategy{
+    private BigDecimal baseFee;
+    private BigDecimal percentageFee;
 
     @Override
-    public BigDecimal calculate(BigDecimal baseValue, String destination){
-        BigDecimal value = valueOf(15).add(
-                (valueOf(0.02).multiply(baseValue))
-        );
-        if ("international".equalsIgnoreCase(destination)){
+    public BigDecimal calculate(BigDecimal baseValue, String destination) {
+        BigDecimal value = getBaseFee().add(baseValue.multiply(getPercentageFee()));
+
+        if ("international".equalsIgnoreCase(destination)) {
             value = value.add(valueOf(20));
         }
 
         return value;
     }
+
 
     @Override
     public String getType() {
@@ -32,7 +34,19 @@ public class StandardShipping implements ShippingStrategy{
 
     @Override
     public BigDecimal getBaseFee() {
-        return new BigDecimal("5.00");
+        return (this.baseFee == null) ? new BigDecimal("5.00") : this.baseFee;
     }
+
+    @Override
+    public BigDecimal getPercentageFee() {
+        return (this.percentageFee == null) ? new BigDecimal("0.02") : this.percentageFee;
+    }
+
+    @Override
+    public void updateFees(BigDecimal baseFee, BigDecimal percentageFee) {
+        this.baseFee = baseFee;
+        this.percentageFee = percentageFee;
+    }
+
 
 }

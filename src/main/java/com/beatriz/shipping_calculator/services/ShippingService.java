@@ -55,4 +55,13 @@ public class ShippingService {
                 strategy.getBaseFee()
         );
     }
+
+    public void updateShippingType(String type, BigDecimal baseFee, BigDecimal percentageFee) {
+        ShippingStrategy strategy = strategyMap.get(type.toLowerCase());
+        if (strategy == null) {
+            throw new IllegalArgumentException("Invalid shipping type: " + type);
+        }
+        strategy.updateFees(baseFee, percentageFee);
+    }
+
 }

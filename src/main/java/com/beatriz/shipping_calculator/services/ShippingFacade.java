@@ -5,6 +5,7 @@ import com.beatriz.shipping_calculator.dtos.ShippingResponse;
 import com.beatriz.shipping_calculator.dtos.ShippingTypeDetailsResponse;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Service
@@ -26,4 +27,9 @@ public class ShippingFacade {
     public ShippingTypeDetailsResponse getShippingTypeDetails(String type) {
         return shippingService.getShippingTypeDetails(type);
     }
+
+    public void updateShippingType(String type, BigDecimal baseFee, BigDecimal percentageFee) {
+        shippingService.updateShippingType(type, baseFee, percentageFee);
+    }
+
 }

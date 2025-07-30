@@ -7,10 +7,16 @@ public interface ShippingStrategy {
     public abstract String getType();
 
     default String getDescription() {
-        return "Tipo de frete " + getType();
+        return "Shipping type: " + getType();
     }
 
     default BigDecimal getBaseFee() {
         return BigDecimal.ZERO;
     }
+
+    default BigDecimal getPercentageFee() {
+        return BigDecimal.ZERO;
+    }
+
+    public abstract void updateFees(BigDecimal baseFee, BigDecimal percentageFee);
 }
